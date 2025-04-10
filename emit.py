@@ -66,13 +66,14 @@ class emittance_calc_solenoid():
     
 ##########计算螺线管的束流发射度
     def func_f(self,xdata,*opt): ###聚焦
+        K,L,Ld=xdata,self.L,self.Ld
         betae,alphae,gammae=opt
-        S=sin(self.ks*self.L)
-        C=cos(self.ks*self.L)
-        R11=C-self.ks*self.Ld*S
-        R12=1/self.ks*S+self.Ld*C
+        S=sin(K*L)
+        C=cos(K*L)
+        R11=C-K*Ld*S
+        R12=1/K*S+Ld*C
         y=betae*R11**2+alphae*-2*R11*R12+gammae*R12**2
-        
+        return y
     def sol_f(self,ks,sigma2):    
         ###ks 聚焦参数
         ###sigma2 束斑尺寸平方
