@@ -55,7 +55,38 @@ class emittance_calc:
         ec=ems[2]/e
         return e,ea,eb,ec,enx,ems
     
+class emittance_calc_solenoid():
+    def __init__(self):
+        self.ks=1 ###聚焦参数
+        self.L=0.1 ###螺线管有效长度(m)
+        self.Ld=1.4528 ###螺线管漂移段长度(m)
+        self.sigma2=1 ###束斑尺寸平方
+        self.energy=53.4 ###束流能量(MeV)
+        pass
     
+##########计算螺线管的束流发射度
+    def func_f(self,xdata,*opt): ###聚焦
+        betae,alphae,gammae=opt
+        S=sin(self.ks*self.L)
+        C=cos(self.ks*self.L)
+        R11=C-self.ks*self.Ld*S
+        R12=1/self.ks*S+self.Ld*C
+        y=betae*R11**2+alphae*-2*R11*R12+gammae*R12**2
+        
+    def sol_f(self,ks,sigma2):    
+        ###ks 聚焦参数
+        ###sigma2 束斑尺寸平方
+        ydata=sigma2
+        xdata=ks
+        init=[1.0,1.0,1.0]
+        result=curve_fit(self.func_f,xdata,ydata,init)
+        ems=result[0]
+        e=sqrt(ems[0]*ems[2]-ems[1]**2)
+        enx=e*(self.energy/0.511)
+        eb=ems[0]/e
+        ea=ems[1]/e
+        ec=ems[2]/e
+        return e,ea,eb,ec,enx,ems
 if __name__ =="__main__":
     c=emittance_calc()
 
