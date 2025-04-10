@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>722</height>
+    <width>895</width>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,11 @@
          <item>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_kinput"/>
+            <widget class="QLineEdit" name="lineEdit_kinput">
+             <property name="text">
+              <string>20.4,20.5,20.6,20.7,20.8,20.9,21.0,21.1,21.2,21.3,21.4,21.5</string>
+             </property>
+            </widget>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_2">
@@ -71,7 +75,11 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_sigma2"/>
+            <widget class="QLineEdit" name="lineEdit_sigma2">
+             <property name="text">
+              <string>0.03,0.023,0.017,0.015,0.0108,0.009,0.0086,0.0093,0.0114,0.0144,0.0185,0.0228</string>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">
@@ -88,17 +96,31 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEdit_energy"/>
+            <widget class="QLineEdit" name="lineEdit_energy">
+             <property name="text">
+              <string>53.4</string>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_compname">
+             <property name="minimumSize">
+              <size>
+               <width>168</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
-              <string>透镜(Q铁)有效长度Lq(m)</string>
+              <string>透镜(Q铁)有效长度L(m)</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEdit_l"/>
+            <widget class="QLineEdit" name="lineEdit_l">
+             <property name="text">
+              <string>0.1</string>
+             </property>
+            </widget>
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_11">
@@ -108,7 +130,11 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_ld"/>
+            <widget class="QLineEdit" name="lineEdit_ld">
+             <property name="text">
+              <string>1.4528</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -145,7 +171,7 @@
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QRadioButton" name="radioButton_quadmag">
+             <widget class="QRadioButton" name="radioButton_quadrupole">
               <property name="text">
                <string>四极铁</string>
               </property>
@@ -207,7 +233,7 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>211</height>
+       <height>358</height>
       </size>
      </property>
      <property name="frameShape">
@@ -218,20 +244,32 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QWidget" name="widget_img" native="true">
+       <widget class="QFrame" name="frame_fig">
         <property name="minimumSize">
          <size>
-          <width>200</width>
-          <height>200</height>
+          <width>500</width>
+          <height>323</height>
          </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox_2">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>236</width>
+          <width>500</width>
           <height>16777215</height>
          </size>
         </property>
@@ -266,6 +304,9 @@
              <pointsize>13</pointsize>
             </font>
            </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
@@ -274,6 +315,9 @@
             <font>
              <pointsize>12</pointsize>
             </font>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -308,6 +352,9 @@
              <pointsize>13</pointsize>
             </font>
            </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="3" column="0">
@@ -318,12 +365,16 @@
             </font>
            </property>
            <property name="text">
-            <string>Y</string>
+            <string>γ</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_y"/>
+          <widget class="QLineEdit" name="lineEdit_gamma">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_9">
@@ -338,7 +389,11 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_epsn"/>
+          <widget class="QLineEdit" name="lineEdit_epsn">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

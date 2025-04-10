@@ -4,26 +4,26 @@ from numpy import cos,cosh,sin,sinh,sqrt
 from scipy import linalg
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
-class emittance_calc:
+class emittance_calc_quadrupole:
     def __init__(self):
         self.ks=1 ###聚焦参数
-        self.Lq=0.1 ###透镜有效长度，Q铁有效长度(m)
+        self.L=0.1 ###透镜有效长度，Q铁有效长度(m)
         self.Ld=1.4528 ###透镜出口到截面靶的距离,漂移段长度(m)
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
         pass
     def func_f(self,xdata,*opt): ###聚焦
-        k,Lq,Ld=xdata,self.Lq,self.Ld
+        k,L,Ld=xdata,self.L,self.Ld
         betae,alphae,gammae=opt
-        r11=cos(sqrt(k)*Lq)-sqrt(k)*Ld*sin(sqrt(k)*Lq)
-        r12=1.0/sqrt(k)*sin(sqrt(k)*Lq)+Ld*cos(sqrt(k)*Lq)
+        r11=cos(sqrt(k)*L)-sqrt(k)*Ld*sin(sqrt(k)*L)
+        r12=1.0/sqrt(k)*sin(sqrt(k)*L)+Ld*cos(sqrt(k)*L)
         y=betae*r11**2-2*alphae*r11*r12+gammae*r12**2
         return y
     def func_d(self,xdata,*opt): ###散焦
-        k,Lq,Ld=xdata,self.Lq,self.Ld
+        k,L,Ld=xdata,self.L,self.Ld
         betae,alphae,gammae=opt
-        R11=cosh(sqrt(k)*Lq)+sqrt(k)*Ld*sinh(sqrt(k)*Lq) 
-        R12=1/sqrt(k)*sinh(sqrt(k)*Lq)+Ld*cosh(sqrt(k)*Lq)
+        R11=cosh(sqrt(k)*L)+sqrt(k)*Ld*sinh(sqrt(k)*L) 
+        R12=1/sqrt(k)*sinh(sqrt(k)*L)+Ld*cosh(sqrt(k)*L)
         y=betae*R11**2+alphae*-2*R11*R12+gammae*R12**2
         return y
     def sol_f(self,ks,sigma2):    
@@ -89,7 +89,7 @@ class emittance_calc_solenoid():
         ec=ems[2]/e
         return e,ea,eb,ec,enx,ems
 if __name__ =="__main__":
-    c=emittance_calc()
+    c=emittance_calc_quadrupole()
 
     ##c.ks=np.array([3.13,3.15,3.17,3.19,3.21,3.23,3.25,3.27])
     ##c.ks=np.array([3.05,3.07,3.09,3.11,3.13,3.15,3.17,3.19,3.21,3.23,3.25,3.27])
