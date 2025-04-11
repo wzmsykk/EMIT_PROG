@@ -36,8 +36,12 @@ class MainDialog(QDialog):
         pass
     def on_radioButton_quadmag_clicked(self):
         self.ui.label_compname.setText("透镜(Q铁)有效长度L(m)")
+        self.ui.radioButton_focus.setEnabled(True)
+        self.ui.radioButton_defocus.setEnabled(True)
     def on_radioButton_solenoid_clicked(self):
         self.ui.label_compname.setText("线圈有效长度L(m)")
+        self.ui.radioButton_focus.setChecked(True)
+        self.ui.radioButton_defocus.setEnabled(False)
     def convert_line_to_list(self, line):
         l=[]
         for i in line.split(","):

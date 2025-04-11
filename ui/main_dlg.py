@@ -205,6 +205,7 @@ class Ui_Dialog(object):
         spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.horizontalLayout_3.addItem(spacerItem3)
         self.pushButton_calc = QtWidgets.QPushButton(self.frame_3)
+        self.pushButton_calc.setMaximumSize(QtCore.QSize(282, 16777215))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.pushButton_calc.setFont(font)
@@ -217,7 +218,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "发射度计算"))
         self.label.setText(_translate("Dialog", "束流发射度计算程序"))
         self.groupBox.setTitle(_translate("Dialog", "参数输入"))
         self.lineEdit_kinput.setText(_translate("Dialog", "20.4,20.5,20.6,20.7,20.8,20.9,21.0,21.1,21.2,21.3,21.4,21.5"))
