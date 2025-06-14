@@ -53,8 +53,9 @@ class MainDialog(QDialog):
             l.append(float(i.strip()))
         print(l)
         return l
-    def covery_list_to_line(self, l):
-        formatted_list = ', '.join([str(i) for i in l])
+    def covery_list_to_line(self, l,tail=3):
+        fmtstr= "{:." + str(tail) + "f}"
+        formatted_list = ', '.join([fmtstr.format(i) for i in l])
         return formatted_list
     def calck(self):
         ####GET TYPE

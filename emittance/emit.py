@@ -102,7 +102,7 @@ class emittance_calc_solenoid():
         S=sin(K*L)
         C=cos(K*L)
         R11=C-K*Ld*S
-        R12=1/K*S+Ld*C
+        R12=S/K+Ld*C
         y=betae*R11**2+alphae*-2*R11*R12+gammae*R12**2
         return y
     def sol_f(self,ks,sigma2):    
