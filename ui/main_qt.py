@@ -41,10 +41,12 @@ class MainDialog(QDialog):
     def on_radioButton_quadrupole_clicked(self):
         self.ui.label_compname.setText("透镜(Q铁)有效长度L(m)")
         self.ui.label_bname.setText("磁场梯度∂‌B/∂‌x(T/m)")
+        self.ui.label_k.setText("聚焦参数K(m⁻²)")
         self.ui.radioButton_defocus.setEnabled(True)
     def on_radioButton_solenoid_clicked(self):
         self.ui.label_compname.setText("线圈有效长度L(m)")
         self.ui.label_bname.setText("磁场强度B(T)")
+        self.ui.label_k.setText("聚焦参数K(m⁻¹)")
         self.ui.radioButton_focus.setChecked(True)
         self.ui.radioButton_defocus.setEnabled(False)
     def convert_line_to_list(self, line):
@@ -113,16 +115,41 @@ class MainDialog(QDialog):
         except AttributeError:
             return
         
+        
+        
         betae,alphae,gammae=eb*ef,ea*ef,ec*ef
-        fittedf=[c.func_f(x,betae,alphae,gammae) for x in ks]
+        if self.ui.radioButton_kvssigma2.isChecked():
+            if self.ui.radioButton_focus.isChecked():
+                fitted=[c.func_f(x,betae,alphae,gammae) for x in ks]
+            elif self.ui.radioButton_defocus.isChecked():
+                fitted=[c.func_d(x,betae,alphae,gammae) for x in ks]
+            xlabel = 'K (m⁻²)' if self.ui.radioButton_quadrupole.isChecked() else 'K (m⁻¹)'
+            ylabel = 'σ² (mm²)'
+        elif self.ui.radioButton_bvssigma2.isChecked():
+            try:
+                bdata=np.array(self.convert_line_to_list(self.ui.lineEdit_binput.text()))
+            except ValueError:
+                return
+            if self.ui.radioButton_focus.isChecked():
+                fitted=[c.func_f(x,betae,alphae,gammae) for x in bdata]
+            elif self.ui.radioButton_defocus.isChecked():
+                fitted=[c.func_d(x,betae,alphae,gammae) for x in bdata]
+            xlabel = 'B (T)' if self.ui.radioButton_solenoid.isChecked() else '∂B/∂x (T/m)'
+            ylabel = 'σ² (mm²)'
         self.figure.clear()
+        
         ax = self.figure.add_subplot(111)
-        ax.plot(fittedf, '*-')
+        ax.plot(fitted, '*-')
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        plt.tight_layout()
         self.canvas.draw()
         
         self.ui.lineEdit_alpha.setText(str(ea))
         self.ui.lineEdit_beta.setText(str(eb))
         self.ui.lineEdit_gamma.setText(str(ec))
         self.ui.lineEdit_eps.setText(str(ef))
-        self.ui.lineEdit_epsn.setText(str(enx))        
+        self.ui.lineEdit_epsn.setText(str(enx))     
+
+        
         

@@ -11,6 +11,7 @@ class emittance_calc_quadrupole:
         self.Ld=1.4528 ###透镜出口到截面靶的距离,漂移段长度(m)
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
+        
         pass
     def b2k(self,bdata):
         """
