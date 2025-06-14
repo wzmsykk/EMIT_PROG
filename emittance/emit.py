@@ -12,6 +12,23 @@ class emittance_calc_quadrupole:
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
         pass
+    def b2k(self,bdata):
+        """
+        将四极铁磁场梯度转换为聚焦参数k
+        energy: 电子能量(MeV)
+        bdata: 磁场梯度(T/m)
+        """
+        print("quadb2k")
+        energy=self.energy
+        c=299792458  # 光速(m/s)
+        m0=0.511 ###电子静止质量(MeV)
+        gamma=(m0+energy) /m0
+        print(f"gamma={gamma}")
+        beta=sqrt(1-1/(gamma**2))
+        print(f"beta={beta}")
+        k=bdata*c/(energy*beta*1E6) 
+        return k
+
     def func_f(self,xdata,*opt): ###聚焦
         k,L,Ld=xdata,self.L,self.Ld
         betae,alphae,gammae=opt
@@ -63,7 +80,21 @@ class emittance_calc_solenoid():
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
         pass
-    
+    def b2k(self,bdata):
+        """
+        将螺线管磁场强度转换为聚焦参数k
+        energy: 电子能量(MeV)
+        bdata: 磁场强度(T)
+        """
+        energy=self.energy
+        c=299792458  # 光速(m/s)
+        m0=0.511 ###电子静止质量(MeV)
+        gamma=(m0+energy) /m0
+        print(f"gamma={gamma}")
+        beta=sqrt(1-1/(gamma**2))
+        print(f"beta={beta}")
+        k=bdata*c/(2*energy*beta*1E6) ###注意这里的2
+        return k
 ##########计算螺线管的束流发射度
     def func_f(self,xdata,*opt): ###聚焦
         K,L,Ld=xdata,self.L,self.Ld

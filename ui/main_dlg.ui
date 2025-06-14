@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>895</width>
-    <height>732</height>
+    <width>925</width>
+    <height>806</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,12 +16,6 @@
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QFrame" name="frame_2">
-     <property name="maximumSize">
-      <size>
-       <width>99999</width>
-       <height>300</height>
-      </size>
-     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -59,84 +53,99 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_kinput">
-             <property name="text">
-              <string>20.4,20.5,20.6,20.7,20.8,20.9,21.0,21.1,21.2,21.3,21.4,21.5</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>聚焦参数K</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_sigma2">
-             <property name="text">
-              <string>0.03,0.023,0.017,0.015,0.0108,0.009,0.0086,0.0093,0.0114,0.0144,0.0185,0.0228</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>束斑尺寸σ2 (mm2)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>束流能量E(MeV)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEdit_energy">
-             <property name="text">
-              <string>53.4</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_compname">
-             <property name="minimumSize">
-              <size>
-               <width>168</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>透镜(Q铁)有效长度L(m)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEdit_l">
-             <property name="text">
-              <string>0.1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>漂移段长度(Ld)(m)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_ld">
-             <property name="text">
-              <string>1.4528</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QWidget" name="widget" native="true">
+           <layout class="QFormLayout" name="formLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_bname">
+              <property name="text">
+               <string>磁场梯度∂‌B/∂‌x(T/m)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_binput"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>聚焦参数K</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_kinput">
+              <property name="text">
+               <string>20.4,20.5,20.6,20.7,20.8,20.9,21.0,21.1,21.2,21.3,21.4,21.5</string>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>束斑尺寸σ2 (mm2)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_sigma2">
+              <property name="text">
+               <string>0.03,0.023,0.017,0.015,0.0108,0.009,0.0086,0.0093,0.0114,0.0144,0.0185,0.0228</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>束流能量E(MeV)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="lineEdit_energy">
+              <property name="text">
+               <string>53.4</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_compname">
+              <property name="minimumSize">
+               <size>
+                <width>168</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>透镜(Q铁)有效长度L(m)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="lineEdit_l">
+              <property name="text">
+               <string>0.1</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>漂移段长度(Ld)(m)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="lineEdit_ld">
+              <property name="text">
+               <string>1.4528</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </item>
          <item>
           <widget class="QFrame" name="frame_4">
@@ -147,26 +156,13 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="2">
-             <widget class="QRadioButton" name="radioButton_focus">
+            <item row="1" column="2">
+             <widget class="QRadioButton" name="radioButton_defocus">
               <property name="text">
-               <string>聚焦</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
+               <string>散焦</string>
               </property>
               <attribute name="buttonGroup">
                <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QRadioButton" name="radioButton_solenoid">
-              <property name="text">
-               <string>螺线管</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
               </attribute>
              </widget>
             </item>
@@ -180,16 +176,6 @@
               </property>
               <attribute name="buttonGroup">
                <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QRadioButton" name="radioButton_defocus">
-              <property name="text">
-               <string>散焦</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
               </attribute>
              </widget>
             </item>
@@ -218,6 +204,36 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QRadioButton" name="radioButton_solenoid">
+              <property name="text">
+               <string>螺线管</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QRadioButton" name="radioButton_focus">
+              <property name="text">
+               <string>聚焦</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup_2</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="pushButton_calck">
+              <property name="text">
+               <string>计算聚焦参数</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
