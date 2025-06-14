@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(908, 868)
+        Dialog.resize(966, 868)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.frame_2 = QtWidgets.QFrame(Dialog)
@@ -131,12 +131,11 @@ class Ui_Dialog(object):
         self.frame_fig.setObjectName("frame_fig")
         self.horizontalLayout.addWidget(self.frame_fig)
         self.widget_2 = QtWidgets.QWidget(self.frame)
-        self.widget_2.setMaximumSize(QtCore.QSize(334, 16777215))
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.groupBox_2 = QtWidgets.QGroupBox(self.widget_2)
-        self.groupBox_2.setMinimumSize(QtCore.QSize(250, 0))
+        self.groupBox_2.setMinimumSize(QtCore.QSize(300, 0))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.groupBox_2.setFont(font)
