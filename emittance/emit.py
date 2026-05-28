@@ -11,24 +11,28 @@ class emittance_calc_quadrupole:
         self.Ld=1.4528 ###透镜出口到截面靶的距离,漂移段长度(m)
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
-        
+        self.rho=0.255 ###二级铁偏转半径(m)
         pass
     def b2k(self,bdata):
         """
         将四极铁磁场梯度转换为聚焦参数k
-        energy: 电子能量(MeV)
+        energy: 电子动能(MeV)
         bdata: 磁场梯度(T/m)
         """
         print("quadb2k")
-        energy=self.energy
+        ek=self.energy ####电子动能(MeV)
         c=299792458  # 光速(m/s)
-        m0=0.511 ###电子静止质量(MeV)
-        gamma=(m0+energy) /m0
-        print(f"gamma={gamma}")
-        beta=sqrt(1-1/(gamma**2))
-        print(f"beta={beta}")
-        k=bdata*c/(energy*beta*1E6) 
-        return k
+        me=9.10956E-31 ###电子质量(kg)
+        m0=me*(c**2)/(1E6) ###电子静止质量(MeV)
+        e=1.602176634E-19 ###基本电荷(C)
+        beta=sqrt(1-(m0/(m0+ek)**2))
+        gamma=1/sqrt(1-beta**2)
+        p=beta*gamma*c*me ###相对论动量(kg*m/s)
+        ###磁感应强度(T)
+        B=p/e/self.rho
+        ###磁场梯度(T/m)
+        K=bdata/self.rho/B
+        return K
 
     def func_f(self,xdata,*opt): ###聚焦
         k,L,Ld=xdata,self.L,self.Ld
@@ -51,6 +55,8 @@ class emittance_calc_quadrupole:
         xdata=ks
         init=[1.0,1.0,1.0]
         result=curve_fit(self.func_f,xdata,ydata,init)
+        print("sol_f result:", result)
+        print("sol_f result[0]:", result[0])
         ems=result[0]
         e=sqrt(ems[0]*ems[2]-ems[1]**2)
         enx=e*(self.energy/0.511)
@@ -75,6 +81,7 @@ class emittance_calc_quadrupole:
     
 class emittance_calc_solenoid():
     def __init__(self):
+        
         self.ks=1 ###聚焦参数
         self.L=0.1 ###螺线管有效长度(m)
         self.Ld=1.4528 ###螺线管漂移段长度(m)
@@ -84,7 +91,7 @@ class emittance_calc_solenoid():
     def b2k(self,bdata):
         """
         将螺线管磁场强度转换为聚焦参数k
-        energy: 电子能量(MeV)
+        energy: 电子动能(MeV)
         bdata: 磁场强度(T)
         """
         energy=self.energy

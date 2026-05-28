@@ -109,7 +109,7 @@ class MainDialog(QDialog):
                 ef,ea,eb,ec,enx,ems=c.sol_f(ks,sig2)
             elif self.ui.radioButton_defocus.isChecked():
                 ef,ea,eb,ec,enx,ems=c.sol_d(ks,sig2)
-            print(ef,ea,eb,ec,enx,ems)
+            print("Fitted parameters:", ef, ea, eb, ec, enx, ems)
         except ValueError:
             return
         except AttributeError:

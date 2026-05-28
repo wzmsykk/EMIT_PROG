@@ -51,7 +51,7 @@ class Ui_Dialog(object):
         self.label_k.setObjectName("label_k")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_k)
         self.lineEdit_kinput = QtWidgets.QLineEdit(self.widget)
-        self.lineEdit_kinput.setReadOnly(True)
+        self.lineEdit_kinput.setReadOnly(False)
         self.lineEdit_kinput.setObjectName("lineEdit_kinput")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_kinput)
         self.label_3 = QtWidgets.QLabel(self.widget)
