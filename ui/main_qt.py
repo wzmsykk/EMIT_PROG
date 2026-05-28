@@ -67,8 +67,8 @@ class MainDialog(QDialog):
             else:
                 self.sub.showNormal()
     def _set_signal_slots(self):
-        self.ui.radioButton_quadrupole.clicked.connect(self.on_radioButton_quadrupole_clicked)
-        self.ui.radioButton_solenoid.clicked.connect(self.on_radioButton_solenoid_clicked)
+        self.sub.ui.radioButton_quadrupole.clicked.connect(self.on_radioButton_quadrupole_clicked)
+        self.sub.ui.radioButton_solenoid.clicked.connect(self.on_radioButton_solenoid_clicked)
         self.ui.pushButton_calc.clicked.connect(self.calc)
         self.ui.pushButton_calc.setDefault(True)
         self.ui.pushButton_calck.clicked.connect(self.calck)
@@ -77,13 +77,13 @@ class MainDialog(QDialog):
         self.ui.label_k.setText("聚焦参数K(m⁻²)")
         self.sub.ui.groupBox_quad.setEnabled(True)
         self.sub.ui.groupBox_sole.setEnabled(False)
-        self.ui.radioButton_defocus.setEnabled(True)
+        self.sub.ui.radioButton_defocus.setEnabled(True)
     def on_radioButton_solenoid_clicked(self):
         self.ui.label_k.setText("聚焦参数K(m⁻¹)")
         self.sub.ui.groupBox_quad.setEnabled(False)
         self.sub.ui.groupBox_sole.setEnabled(True)
-        self.ui.radioButton_focus.setChecked(True)
-        self.ui.radioButton_defocus.setEnabled(False)
+        self.sub.ui.radioButton_focus.setChecked(True)
+        self.sub.ui.radioButton_defocus.setEnabled(False)
     def convert_line_to_list(self, line):
         l=[]
         for i in line.split(","):
@@ -97,11 +97,11 @@ class MainDialog(QDialog):
     def calck(self):
         ####GET TYPE
         mode=0
-        if self.ui.radioButton_quadrupole.isChecked():
+        if self.sub.ui.radioButton_quadrupole.isChecked():
             mode=0
             c=self.model_quad
             print("quadrupole")
-        elif self.ui.radioButton_solenoid.isChecked():
+        elif self.sub.ui.radioButton_solenoid.isChecked():
             print("solenoid")
             mode=1
             c=self.model_sol
@@ -133,10 +133,10 @@ class MainDialog(QDialog):
     def calc(self):
         ####GET TYPE
         mode=0
-        if self.ui.radioButton_quadrupole.isChecked():
+        if self.sub.ui.radioButton_quadrupole.isChecked():
             mode=0
             c=self.model_quad
-        elif self.ui.radioButton_solenoid.isChecked():
+        elif self.sub.ui.radioButton_solenoid.isChecked():
             mode=1
             c=self.model_sol
         else:
@@ -158,9 +158,9 @@ class MainDialog(QDialog):
             print(ks)
             sig2=np.array(self.convert_line_to_list(self.ui.lineEdit_sigma2.text()))
             print(sig2)
-            if self.ui.radioButton_focus.isChecked():
+            if self.sub.ui.radioButton_focus.isChecked():
                 ef,ea,eb,ec,enx,ems=c.sol_f(ks,sig2)
-            elif self.ui.radioButton_defocus.isChecked():
+            elif self.sub.ui.radioButton_defocus.isChecked():
                 ef,ea,eb,ec,enx,ems=c.sol_d(ks,sig2)
             print("Fitted parameters:", ef, ea, eb, ec, enx, ems)
         except ValueError:
@@ -172,22 +172,22 @@ class MainDialog(QDialog):
         
         betae,alphae,gammae=eb*ef,ea*ef,ec*ef
         if self.ui.radioButton_kvssigma2.isChecked():
-            if self.ui.radioButton_focus.isChecked():
+            if self.sub.ui.radioButton_focus.isChecked():
                 fitted=[c.func_f(x,betae,alphae,gammae) for x in ks]
-            elif self.ui.radioButton_defocus.isChecked():
+            elif self.sub.ui.radioButton_defocus.isChecked():
                 fitted=[c.func_d(x,betae,alphae,gammae) for x in ks]
-            xlabel = 'K (m⁻²)' if self.ui.radioButton_quadrupole.isChecked() else 'K (m⁻¹)'
+            xlabel = 'K (m⁻²)' if mode==0 else 'K (m⁻¹)'
             ylabel = 'σ² (mm²)'
         elif self.ui.radioButton_bvssigma2.isChecked():
             try:
                 bdata=np.array(self.convert_line_to_list(self.ui.lineEdit_binput.text()))
             except ValueError:
                 return
-            if self.ui.radioButton_focus.isChecked():
+            if self.sub.ui.radioButton_focus.isChecked():
                 fitted=[c.func_f(x,betae,alphae,gammae) for x in bdata]
-            elif self.ui.radioButton_defocus.isChecked():
+            elif self.sub.ui.radioButton_defocus.isChecked():
                 fitted=[c.func_d(x,betae,alphae,gammae) for x in bdata]
-            xlabel = 'B (T)' if self.ui.radioButton_solenoid.isChecked() else '∂B/∂x (T/m)'
+            xlabel = 'B (T)' if mode==1 else '∂B/∂x (T/m)'
             ylabel = 'σ² (mm²)'
         self.figure.clear()
         
