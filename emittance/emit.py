@@ -11,7 +11,6 @@ class emittance_calc_quadrupole:
         self.Ld=1.4528 ###透镜出口到截面靶的距离,漂移段长度(m)
         self.sigma2=1 ###束斑尺寸平方
         self.energy=53.4 ###束流能量(MeV)
-        self.rho=0.255 ###二级铁偏转半径(m)
         pass
     def b2k(self,bdata):
         """
@@ -20,18 +19,34 @@ class emittance_calc_quadrupole:
         bdata: 磁场梯度(T/m)
         """
         print("quadb2k")
+        # Version 1
+        # ek=self.energy ####电子动能(MeV)
+        # c=299792458  # 光速(m/s)
+        # me=9.10956E-31 ###电子质量(kg)
+        # e=1.602176634E-19 ###基本电荷(C)
+        # m0=me*(c**2)/(1E6)/e ###电子静止质量(MeV)
+        
+        # beta=sqrt(1-(m0/(m0+ek))**2)
+        # gamma=1/sqrt(1-beta**2)
+        # p=beta*gamma*c*me ###相对论动量(kg*m/s)
+        # ###磁感应强度(T)
+        # Brho=p/e
+        # ###磁场梯度(T/m)
+        # K=bdata/Brho
+        
+        
+        ###Version 2
         ek=self.energy ####电子动能(MeV)
         c=299792458  # 光速(m/s)
-        me=9.10956E-31 ###电子质量(kg)
-        m0=me*(c**2)/(1E6) ###电子静止质量(MeV)
-        e=1.602176634E-19 ###基本电荷(C)
-        beta=sqrt(1-(m0/(m0+ek)**2))
-        gamma=1/sqrt(1-beta**2)
-        p=beta*gamma*c*me ###相对论动量(kg*m/s)
-        ###磁感应强度(T)
-        B=p/e/self.rho
-        ###磁场梯度(T/m)
-        K=bdata/self.rho/B
+        m0=0.5109989461 ###电子静止质量(MeV)
+        ###p=1/c*sqrt(ek**2+2*ek*m0)*1E6*e ###相对论动量(kg*m/s)
+        p_MeVc=sqrt(ek**2+2*ek*m0) ###相对论动量(MeV/c)
+        ### Brho=p/e=1/c*sqrt(ek**2+2*ek*m0)*1E6*e/e
+        ###     =1/c*1E6*sqrt(ek**2+2*ek*m0) ###磁刚度(T*m)
+        Brho=p_MeVc*1E6/c ###磁刚度(T*m)
+        K=bdata/Brho
+
+        
         return K
 
     def func_f(self,xdata,*opt): ###聚焦
